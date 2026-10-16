@@ -27,7 +27,7 @@ On-demand workflows live in [skills/](skills/).
 
 Agent definitions live in [agents/](agents/).
 
-- [Code reviewer](agents/code-reviewer.md): the Smartbase code review agent — enforces the elegance standards in [rules/coding-standards.md](rules/coding-standards.md) through a mechanical Definition of Done. Mode A posts an inline review on a GitHub PR; Mode B reviews local changes and annotates them with `// CR:` comments. The development workflow runs Mode B after implementation; every finding must be fixed and re-reviewed, and only a review with no findings lets the task continue to proof and the merge request.
+- [Code reviewer](agents/code-reviewer.md): the code review agent — enforces the elegance standards in [rules/coding-standards.md](rules/coding-standards.md) through a mechanical Definition of Done. Mode A posts an inline review on a GitHub PR; Mode B reviews local changes and annotates them with `// CR:` comments. The development workflow runs Mode B after implementation; every finding must be fixed and re-reviewed, and only a review with no findings lets the task continue to proof and the merge request.
 
 ## Using These Standards With AI Agents
 

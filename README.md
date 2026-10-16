@@ -27,13 +27,13 @@ On-demand workflows live in [skills/](skills/).
 
 Agent definitions live in [agents/](agents/).
 
-- [Code reviewer](agents/code-reviewer.md): reviews a task branch against `dev`, the card's requirements, and every rule in [rules/](rules/). The development workflow runs it after implementation; every note it reports must be fixed and re-reviewed, and only a review with no notes lets the task continue to proof and the merge request.
+- [Code reviewer](agents/code-reviewer.md): the Smartbase code review agent — enforces the elegance standards in [rules/coding-standards.md](rules/coding-standards.md) through a mechanical Definition of Done. Mode A posts an inline review on a GitHub PR; Mode B reviews local changes and annotates them with `// CR:` comments. The development workflow runs Mode B after implementation; every finding must be fixed and re-reviewed, and only a review with no findings lets the task continue to proof and the merge request.
 
 ## Using These Standards With AI Agents
 
 The rules are published in two formats so each toolchain picks them up on its own.
 
-- **Claude** — [CLAUDE.md](CLAUDE.md) consolidates every file in [rules/](rules/) into one document that Claude Code loads as project-wide guidance. Drop it at the root of any repository that should follow these standards. Skills go to `.claude/skills/<name>/SKILL.md` with a `name` and `description`, so Claude Code can invoke them on demand. Agents go to `.claude/agents/<name>.md` with a `name`, `description` and read-only `tools`, so Claude Code can run them as subagents.
+- **Claude** — [CLAUDE.md](CLAUDE.md) consolidates every file in [rules/](rules/) into one document that Claude Code loads as project-wide guidance. Drop it at the root of any repository that should follow these standards. Skills go to `.claude/skills/<name>/SKILL.md` with a `name` and `description`, so Claude Code can invoke them on demand. Agents go to `.claude/agents/<name>.md` with a `name`, `description` and `tools`, so Claude Code can run them as subagents.
 - **Codex** — `AGENTS.md` points Codex at [rules/](rules/), and each skill and agent gets a thin adapter at `.agents/skills/<name>/SKILL.md` that references the canonical file. The code reviewer becomes the `code-review` skill.
 - **GitHub Copilot** — copy each rule to `.github/instructions/<name>.instructions.md` with `applyTo` frontmatter, each skill to `.github/skills/<name>/SKILL.md` with a `name` and `description`, and each agent to `.github/agents/<name>.agent.md` with a `name`, `description` and `tools`. Copilot only auto-loads those paths, so a plain copy of `rules/`, `skills/` or `agents/` is silently ignored.
 

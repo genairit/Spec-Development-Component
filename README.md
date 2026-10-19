@@ -29,7 +29,7 @@ Agent definitions live in [agents/](agents/).
 
 - [Code reviewer](agents/code-reviewer.md): the code review agent — enforces the elegance standards in [rules/coding-standards.md](rules/coding-standards.md) through a mechanical Definition of Done. Mode A posts an inline review on a GitHub PR; Mode B reviews local changes and annotates them with `// CR:` comments. The development workflow runs Mode B after implementation; every finding must be fixed and re-reviewed, and only a review with no findings lets the task continue to proof and the merge request.
 
-- [QA agent](agents/qa-agent.md): maintains feature coverage in Gen-Air-Automation, verifies local checks and maintained coverage before feature PRs, then verifies full integration only through frontend release PR gates. It publishes the Automation PR and a scoped PASSED/FAILED handoff with pending integration explicit. Application fixes belong to the development agent and require another clean code review.
+- [QA agent](agents/qa-agent.md): maintains feature coverage in Gen-Air-Automation, runs targeted and full regression against exact feature revisions, publishes the Automation PR, and returns a structured PASSED/FAILED handoff before proof and feature PRs. Application fixes belong to the development agent and require another clean code review.
 
 ## Using These Standards With AI Agents
 

@@ -1,7 +1,11 @@
 import { useState } from "react";
 import { Box, Typography } from "@mui/material";
+import SmartbaseCard from "../vendor/smartbase/components/Card/Card";
 import Button from "../components/Button/Button";
 import Toggle from "../components/Toggle/Toggle";
+import Switch from "../components/Switch/Switch";
+import ProgressBar from "../components/ProgressBar/ProgressBar";
+import NoticeCard from "../components/NoticeCard/NoticeCard";
 import CheckBox from "../components/CheckBox/CheckBox";
 import TextField from "../components/TextField/TextField";
 import DatePicker from "../components/DatePicker/DatePicker";
@@ -21,19 +25,7 @@ interface ISectionProps {
 }
 
 const Section = ({ title, children }: ISectionProps) => (
-  <Box
-    sx={{
-      gap: 2,
-      padding: 2,
-      display: "flex",
-      borderRadius: "13px",
-      flexDirection: "column",
-      backgroundColor: "#F6F8FB",
-    }}
-  >
-    <Typography sx={{ fontSize: 18, fontWeight: 700 }}>{title}</Typography>
-    {children}
-  </Box>
+  <SmartbaseCard title={title}>{children}</SmartbaseCard>
 );
 
 const ComponentsShowcase = () => {
@@ -43,7 +35,10 @@ const ComponentsShowcase = () => {
   const [isChecked, setIsChecked] = useState(false);
   const [isSigned, setIsSigned] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [isButtonLoading, setIsButtonLoading] = useState(false);
   const [toggleValue, setToggleValue] = useState(true);
+  const [switchValue, setSwitchValue] = useState(false);
+  const [progressValue, setProgressValue] = useState(3);
   const [city, setCity] = useState<string | null>(null);
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const [singleDate, setSingleDate] = useState<Date | null>(null);
@@ -54,6 +49,15 @@ const ComponentsShowcase = () => {
 
   const handleAsyncConfirm = async () => {
     await new Promise((resolve) => setTimeout(resolve, 600));
+  };
+
+  const handleButtonClick = async () => {
+    setIsButtonLoading(true);
+    try {
+      await handleAsyncConfirm();
+    } finally {
+      setIsButtonLoading(false);
+    }
   };
 
   return (
@@ -109,7 +113,11 @@ const ComponentsShowcase = () => {
       </Section>
 
       <Section title="Button">
-        <Button text="שמירה" onClick={handleAsyncConfirm} />
+        <Button
+          text="שמירה"
+          isLoading={isButtonLoading}
+          onClick={handleButtonClick}
+        />
         <Button text="ביטול" variant="secondary" onClick={() => {}} />
         <Button text="מושבת" disabled onClick={() => {}} />
       </Section>
@@ -131,6 +139,23 @@ const ComponentsShowcase = () => {
           secondValuePlaceHolder="אפשרות ב"
         />
         <Typography>ערך: {String(toggleValue)}</Typography>
+      </Section>
+
+      <Section title="Switch">
+        <Switch label="התראות" value={switchValue} onChange={setSwitchValue} />
+      </Section>
+
+      <Section title="ProgressBar">
+        <ProgressBar value={progressValue} total={5} />
+        <Button
+          text="עדכן התקדמות"
+          variant="secondary"
+          onClick={() => setProgressValue(progressValue === 3 ? 4 : 3)}
+        />
+      </Section>
+
+      <Section title="NoticeCard">
+        <NoticeCard text="המידע נשמר בהצלחה" variant="success" />
       </Section>
 
       <Section title="DatePicker">

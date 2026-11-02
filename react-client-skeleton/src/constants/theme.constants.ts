@@ -1,24 +1,30 @@
 export const theme = {
+  palette: {
+    charcoal: "#0F172A",
+    textMuted: "#64748B",
+    primaryHover: "#0F5CA8",
+  },
+  font: {
+    body: "'Rubik', 'Heebo', system-ui, sans-serif",
+  },
   background: {
-    lightGray: "#F6F8FB",
-    purpleGradient:
-      "linear-gradient(90deg, rgba(71, 118, 230, 1) 0%, rgba(142, 84, 233, 1) 100%)",
-    flippedPurpleGradient:
-      "linear-gradient(90deg, rgba(142, 84, 233, 1) 0%, rgba(71, 118, 230, 1) 100%)",
+    lightGray: "#F8FAFC",
+    purpleGradient: "linear-gradient(135deg, #0F5CA8 0%, #1668BD 100%)",
+    flippedPurpleGradient: "linear-gradient(135deg, #1668BD 0%, #0F5CA8 100%)",
   },
   colors: {
     info: "#262E3A",
     error: "#DE4040",
     white: "#FFFFFF",
     black: "#000000",
-    purple: "#5f42ff",
+    purple: "#1668BD",
     warning: "#DEA140",
     success: "#5ADE40",
-    lightPurple: "#707CDF",
+    lightPurple: "#1F7FDB",
   },
   button: {
-    primary: "#707CDF",
-    secondary: "#9EA8F1",
+    primary: "#1668BD",
+    secondary: "#E1EDFA",
   },
   border: {
     primary: "#262E3A",

@@ -1,4 +1,12 @@
 export const theme = {
+  palette: {
+    charcoal: "#0F172A",
+    textMuted: "#64748B",
+    primaryHover: "#0F5CA8",
+  },
+  font: {
+    body: "'Rubik', 'Heebo', system-ui, sans-serif",
+  },
   background: {
     lightGray: "#F8FAFC",
     purpleGradient: "linear-gradient(135deg, #0F5CA8 0%, #1668BD 100%)",

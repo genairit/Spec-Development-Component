@@ -1,8 +1,10 @@
 # Smartbase component source in the React starter
 
-The Button, Card, Switch, Segmented, CheckBox, ProgressBar, NoticeCard, and FieldLabel implementations here were copied from
+The Autocomplete, Button, Card, Switch, Segmented, CheckBox, ProgressBar, NoticeCard, and FieldLabel implementations here were copied from
 `Smartbase-Client-Package` commit `8f14318`. The starter's existing control
 APIs wrap them so showcase and generated clients retain their props.
+The starter DatePicker carries the package's calendar and range styles while
+retaining its MUI 9 day component and value API.
 
 Local changes: GenAir blue and white color mapping, TypeScript type imports for the client compiler, reduced motion
 rules, and a browser vibration adapter in place of the package's iOS haptics

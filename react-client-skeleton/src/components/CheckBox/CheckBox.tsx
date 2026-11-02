@@ -1,7 +1,6 @@
-import Check from "../../icons/Check";
-import { useStyles } from "./CheckBox.style";
+import SmartbaseCheckBox from "../../vendor/smartbase/components/CheckBox/CheckBox";
 import { theme } from "../../constants/theme.constants";
-import { type FC, useEffect, type JSX, useState } from "react";
+import type { FC, JSX } from "react";
 
 interface ICheckBoxProps {
   value: boolean;
@@ -18,32 +17,14 @@ const CheckBox: FC<ICheckBoxProps> = ({
   disabled = false,
   textColor = theme.colors.black,
 }) => {
-  const styles = useStyles();
-  const [checked, setChecked] = useState(value);
-
-  useEffect(() => {
-    if (value !== checked) {
-      onChange(checked);
-    }
-  }, [value, checked]);
-
-  const handleChange = () => {
-    if (disabled) return;
-
-    const nextChecked = !checked;
-
-    setChecked(nextChecked);
-    onChange(nextChecked);
-  };
-
   return (
-    <div
-      onClick={handleChange}
-      style={styles.container({ disabled, textColor })}
-    >
-      <div style={styles.checkBox}>{checked && <Check />}</div>
-      {text}
-    </div>
+    <SmartbaseCheckBox
+      text={text}
+      value={value}
+      disabled={disabled}
+      textColor={textColor}
+      onChange={onChange}
+    />
   );
 };
 

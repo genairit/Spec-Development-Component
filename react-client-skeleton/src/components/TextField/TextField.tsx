@@ -1,12 +1,16 @@
-import { useStyles } from "./TextField.style"
+import { useStyles } from "./TextField.style";
 import CharCounterAdornment from "./CharCounter";
+import FieldLabel from "../../vendor/smartbase/components/FieldLabel/FieldLabel";
 import { safeAssign } from "../../utilities/object.utility";
 import { getHelperText } from "../../utilities/textfield.utility";
 import { validateInput } from "../../utilities/validation.utility";
-import { type ChangeEvent, type FC, useState, useEffect } from "react";
-import { type TFieldType, KEYBOARD_TYPE_MAP } from "./constants/textfield.constants";
+import { type ChangeEvent, type FC, useEffect } from "react";
+import {
+  type TFieldType,
+  KEYBOARD_TYPE_MAP,
+} from "./constants/textfield.constants";
 import { type IValidationResult } from "../../interfaces/validation-result.interface";
-import { Typography, type TextFieldProps, TextField as MuiTextField } from "@mui/material";
+import { type TextFieldProps, TextField as MuiTextField } from "@mui/material";
 
 export type TTextfieldProps = Omit<TextFieldProps, "onChange"> & {
   value: string;
@@ -31,6 +35,7 @@ const TextField: FC<TTextfieldProps> = ({
   infoText,
   readonly,
   onChange,
+  required,
   maxLength,
   validator,
   setIsValid,
@@ -53,7 +58,7 @@ const TextField: FC<TTextfieldProps> = ({
     throw new Error(`Invalid field type: ${type}`);
   }
   const inputType = KEYBOARD_TYPE_MAP[type];
-  const [internalValue, setInternalValue] = useState(value);
+  const internalValue = value;
   const { isValid, errorText } = validateInput(value, type, validator);
   const helperText = getHelperText({ errorText, warningText, infoText });
 
@@ -78,18 +83,10 @@ const TextField: FC<TTextfieldProps> = ({
     setIsValid?.(isValid);
   }, [isValid]);
 
-  useEffect(() => {
-    if (value !== internalValue) {
-      setInternalValue(value);
-    }
-  }, [value, internalValue]);
-
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (readonly || disabled) {
       return;
     }
-    setInternalValue(e.target.value);
-
     if (onChange) {
       onChange(e.target.value, e);
     }
@@ -97,7 +94,7 @@ const TextField: FC<TTextfieldProps> = ({
 
   return (
     <div style={styles.fieldContainer}>
-      {title && <Typography sx={styles.title}>{title}</Typography>}
+      <FieldLabel title={title} required={required} />
 
       <MuiTextField
         {...props}
@@ -106,6 +103,7 @@ const TextField: FC<TTextfieldProps> = ({
         type={inputType}
         variant="outlined"
         disabled={disabled}
+        required={required}
         onChange={handleChange}
         placeholder={placeholder}
         value={internalValue ?? ""}

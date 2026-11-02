@@ -13,6 +13,12 @@ export const useStyles = ({ disabled, helperTextColor }: IStylesParams) =>
         borderRadius: "17px",
         backgroundColor: disabled ? "#C3C3C3" : "#fff",
         padding: "0px 12px",
+        border: "1px solid #E2E8F0",
+        transition: "border-color 0.18s ease, box-shadow 0.18s ease",
+        "&.Mui-focused": {
+          borderColor: "#1668BD",
+          boxShadow: "0 0 0 3px rgba(22, 104, 189, 0.16)",
+        },
 
         "& .MuiOutlinedInput-notchedOutline": {
           border: "none",

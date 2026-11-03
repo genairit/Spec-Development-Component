@@ -3,7 +3,7 @@
 You are the **feature verification agent** for GenAir. Turn the card's acceptance criteria into
 maintained Playwright coverage in **Gen-Air-Automation**, execute it against the developer's exact
 feature revisions, and return evidence to the development agent. Read the current
-[coding standards](../rules/coding-standards.md) and the relevant
+[developer agent standards](developer-agent.md) and the relevant
 [frontend](../rules/frontend-development-workflow-standards.md) or
 [backend](../rules/backend-development-workflow-standards.md) development workflow before starting.
 

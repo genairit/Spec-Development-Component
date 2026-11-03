@@ -9,10 +9,9 @@ Reusable components and project skeletons for specification-driven development.
 
 ## Development Standards
 
-Shared standards live in [rules/](rules/). Select the frontend or backend workflow for
-the repository being developed.
+The [developer agent](agents/developer-agent.md) owns the implementation standards.
+Select the frontend or backend workflow in [rules/](rules/) for the repository.
 
-- [Elegance & coding standards](rules/coding-standards.md): pyramid ordering, declarative and self-explaining code, and the refactoring patterns favored across the codebase.
 - [Frontend development workflow](rules/frontend-development-workflow-standards.md): reads the task, obtains the design agent's style handoff, then implements, reviews, verifies, and opens the merge request.
 - [Backend development workflow](rules/backend-development-workflow-standards.md): reads the task, then implements, reviews, verifies, and opens the merge request. Its planning stage can be extended when the backend architecture agent is defined.
 - [Close the feedback loop](rules/feedback-loops.md): how to verify work with real evidence — cURL for endpoints, unit tests for generic functions, component tests for complex server logic.
@@ -29,17 +28,18 @@ On-demand workflows live in [skills/](skills/).
 
 Agent definitions live in [agents/](agents/).
 
+- [Developer agent](agents/developer-agent.md): implements requirements using the extracted standards; for UI work it follows the design handoff and reuses existing generic components as much as possible.
 - [Design agent](agents/design-agent.md): reads task requirements and the client's current design language, defines a coherent style and interaction direction, and hands a structured specification to the development agent before client-facing UI implementation.
-- [Code reviewer](agents/code-reviewer.md): the code review agent — enforces the elegance standards in [rules/coding-standards.md](rules/coding-standards.md) through a mechanical Definition of Done. Mode A posts an inline review on a GitHub PR; Mode B reviews local changes and annotates them with `// CR:` comments. The development workflow runs Mode B after implementation; every finding must be fixed and re-reviewed, and only a review with no findings lets the task continue to proof and the merge request.
+- [Code reviewer](agents/code-reviewer.md): the code review agent — enforces the numbered standards in [the developer agent](agents/developer-agent.md) through a mechanical Definition of Done. Mode A posts an inline review on a GitHub PR; Mode B reviews local changes and annotates them with `// CR:` comments. The development workflow runs Mode B after implementation; every finding must be fixed and re-reviewed, and only a review with no findings lets the task continue to proof and the merge request.
 
 - [QA agent](agents/qa-agent.md): maintains feature coverage in Gen-Air-Automation, runs targeted and full regression against exact feature revisions, publishes the Automation PR, and returns a structured PASSED/FAILED handoff before proof and feature PRs. Application fixes belong to the development agent and require another clean code review.
 
 ## Using These Standards With AI Agents
 
-The rules are published in two formats so each toolchain picks them up on its own.
+The canonical workflows and agents have tool-specific entry points.
 
-- **Claude** — [CLAUDE.md](CLAUDE.md) consolidates every file in [rules/](rules/) into one document that Claude Code loads as project-wide guidance. Drop it at the root of any repository that should follow these standards. Skills go to `.claude/skills/<name>/SKILL.md` with a `name` and `description`, so Claude Code can invoke them on demand. Agents go to `.claude/agents/<name>.md` with a `name`, `description` and `tools`, so Claude Code can run them as subagents.
-- **Codex** — `AGENTS.md` points Codex at [rules/](rules/), and each skill and agent gets a thin adapter at `.agents/skills/<name>/SKILL.md` that references the canonical file. The design agent becomes the `design` skill, the code reviewer becomes `code-review`, and the QA agent becomes `qa`.
-- **GitHub Copilot** — copy each rule to `.github/instructions/<name>.instructions.md` with `applyTo` frontmatter, each skill to `.github/skills/<name>/SKILL.md` with a `name` and `description`, and each agent to `.github/agents/<name>.agent.md` with a `name`, `description` and `tools`. Copilot only auto-loads those paths, so a plain copy of `rules/`, `skills/` or `agents/` is silently ignored.
+- **Claude** — [CLAUDE.md](CLAUDE.md) consolidates the workflows and links the developer agent that Claude Code loads as project-wide guidance. Drop it at the root of any repository that should follow these standards. Skills go to `.claude/skills/<name>/SKILL.md` with a `name` and `description`, so Claude Code can invoke them on demand. Agents go to `.claude/agents/<name>.md` with a `name`, `description` and `tools`, so Claude Code can run them as subagents.
+- **Codex** — `AGENTS.md` points Codex at [rules/](rules/), and each skill and agent gets a thin adapter at `.agents/skills/<name>/SKILL.md` that references the canonical file. The developer agent becomes the `developer` skill, the design agent becomes `design`, the code reviewer becomes `code-review`, and the QA agent becomes `qa`.
+- **GitHub Copilot** — install workflows as `.github/instructions/<name>.instructions.md` with `applyTo` frontmatter, each skill to `.github/skills/<name>/SKILL.md` with a `name` and `description`, and each agent to `.github/agents/<name>.agent.md` with a `name`, `description` and `tools`. Copilot only auto-loads those paths, so a plain copy of `rules/`, `skills/` or `agents/` is silently ignored.
 
 [rules/](rules/), [skills/](skills/) and [agents/](agents/) are the source of truth; `CLAUDE.md`, `AGENTS.md`, `.claude/`, `.agents/` and any `.github/` copies are derived from them and must be regenerated when a rule, skill or agent changes.
